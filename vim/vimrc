@@ -1,4 +1,10 @@
 "" Archivo de configuración del VIM
+"" Para inicializar:
+"" Instalación de plugins
+"" git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+"" vim +PluginInstall +qall
+"" Paquetes complementarios necesarios:
+"" ctags pep8
 
 set nocompatible              " be iMproved, required
 filetype off                  " required
