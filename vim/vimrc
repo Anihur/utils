@@ -1,0 +1,203 @@
+"" Archivo de configuración del VIM
+
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+
+" Apariencia
+syntax on
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" Plugins
+" Let Vundle manage Vundle
+Bundle 'gmarik/vundle'
+
+"" --------------------------------------------------------
+Bundle 'scrooloose/nerdtree'
+" NERDtree 
+let NERDTreeShowHidden=1 " Ver archivos ocultos
+let NERDTreeQuitOnOpen=1 " Cerrar después de abrir archivo/s
+" Muestra y oculta el árbol de ficheros
+map <F2> :NERDTreeToggle<CR>
+" o -> Abre archivo nueva ventana 
+" t -> Abre archivo en una nueva pestaña
+
+"" --------------------------------------------------------
+Bundle 'yegappan/mru'
+" MRU 
+" Muestre los últimos archivos abiertos
+map <F3> :MRU<CR>
+ 
+"" --------------------------------------------------------
+Bundle 'majutsushi/tagbar'
+let g:tagbar_usearrows = 1
+"nnoremap <leader>l :TagbarToggle<CR>
+map <F4> :TagbarToggle<CR>
+
+
+"Bundle 'taglist.vim'
+" Taglist
+" Necesita los paquetes:
+" exuberant-ctags
+"map <F4> :TlistToggle<CR>
+" Poner el frame en la derecha que el Project ya lo pone a la izquierda
+"let Tlist_Use_Right_Window = 1
+" Tamaño mínimo de frame de tags
+"let Tlist_WinWidth = 40
+
+"" --------------------------------------------------------
+Bundle 'vim-scripts/TaskList.vim'
+" Tasklist. Genera una lista de cosas por hace en el código
+" Por defecto busca en el código: FIXME, TODO y XXX
+" Para verlo por defecto \t 
+map <F5> \t
+" La ventana se muestra arriba
+let g:tlWindowPosition = 0 
+" Palabras claves que busca
+let g:tlTokenList = ['TODO', 'OJO', 'REVISAR', 'IMPORTANTE','!!!']
+
+"" --------------------------------------------------------
+Bundle 'pep8'
+" pep8 - Verifica que se cumple el PEP8 de python
+" Por defecto F5
+" Con :cn vas saltando directamente de fallo en fallo
+" Necesita instalar el paquete pep8
+" Lo ponemos en la tecla F8
+let g:pep8_map='<F8>' 
+
+"" --------------------------------------------------------
+Bundle 'scrooloose/nerdcommenter'
+" NERD Commenter 
+" \cc -> comenta
+" \cu -> descomenta
+" \c+espacio -> comenta\descomenta
+
+
+
+
+"" --------------------------------------------------------
+" Riv is short for 'reStructuredText in Vim'
+Bundle 'Rykka/riv.vim'
+
+
+"" --------------------------------------------------------
+" Autocompletado en Python
+Bundle 'davidhalter/jedi-vim'
+
+"" --------------------------------------------------------
+" Uso de snipets
+Bundle "MarcWeber/vim-addon-mw-utils"
+Bundle "tomtom/tlib_vim"
+Bundle "garbas/vim-snipmate"
+
+" Optional:
+Bundle "honza/vim-snippets"
+
+"" --------------------------------------------------------
+Bundle 'Raimondi/delimitMate'
+" Provides automatic closing of quotes, parenthesis, brackets,..."
+
+"" --------------------------------------------------------
+Bundle 'docunext/closetag.vim'
+let g:closetag_html_style=1
+au Filetype html,xml,xsl source ~/.vim/bundle/closetag.vim/plugin/closetag.vim " Ver si funciona"
+
+"" --------------------------------------------------------
+" Python ckeck
+Bundle 'kevinw/pyflakes-vim'
+
+"" --------------------------------------------------------
+" Autorellenado
+Bundle 'ervandew/supertab'
+"" --------------------------------------------------------
+" Integración con Git
+Bundle 'tpope/vim-fugitive'
+"" --------------------------------------------------------
+" Control de versiones
+Bundle 'http://github.com/sjl/gundo.vim.git'
+nnoremap <F9> :GundoToggle<CR>
+
+"" --------------------------------------------------------
+" Colores
+Bundle 'altercation/vim-colors-solarized'
+" Hay que añadir al bashrc:
+" export TERM="xterm-256color"
+set background=dark
+let g:solarized_termtrans=1
+let g:solarized_termcolors=256
+let g:solarized_contrast="high"
+let g:solarized_visibility="high"
+let g:solarized_termcolors=256
+colorscheme solarized
+
+
+
+"" --------------------------------------------------------
+"" Atajos de teclado:
+
+" F6 Activa/Desactiva la numeración
+map <F6> :set number!<CR>
+
+" F7 Activa/Desactiva la identación al pegar
+" Con el activado no funcionan los snippets
+set nopaste
+map <F7> :set paste!<CR>
+
+" Uso de pestañas - Mapeo
+"Nueva pestaña con control+t
+map <C-t> :tabnew 
+"Moverte a la siguiente pestaña control + -->
+map <C-Right> :tabnext<CR>
+"Moverte a la previa pestaña control + <--
+map <C-Left> :tabprevious<CR>
+"Moverte a la primera pestaña control + arriba
+map <C-Up> :tabfirst<CR>
+"Moverte a la ultima pestaña control + abajo
+map <C-Down> :tablast<CR>
+
+
+filetype plugin indent on     " required
+" To ignore plugin indent changes, instead use:
+" filetype plugin on
+"
+" Brief help
+" :PluginList          - list configured plugins
+" :PluginInstall(!)    - install (update) plugins
+" :PluginSearch(!) foo - search (or refresh cache first) for foo
+" :PluginClean(!)      - confirm (or auto-approve) removal of unused plugins
+"
+" see :h vundle for more details or wiki for FAQ
+" NOTE: comments after Plugin commands are not allowed.
+" Put your stuff after this line
+"
+"
+" Definición para archivos .rst
+au BufRead,BufNewFile *.rst set ts=2 sts=2 sw=2
+au BufRead,BufNewFile *.rst set expandtab
+au BufRead,BufNewFile *.rst set noai 
+au BufRead,BufNewFile *.rst set number
+au BufRead,BufNewFile *.rst set textwidth=79
+au BufRead,BufNewFile *.rst highlight RedundantWhitespace ctermbg=blue guibg=blue
+au BufRead,BufNewFile *.rst highlight BadWhitespace ctermbg=red guibg=red
+au BufRead,BufNewFile *.rst match BadWhitespace /^\t\+/
+au BufRead,BufNewFile *.rst match BadWhitespace /^\s\+$/
+au BufRead,BufNewFile *.rst set foldmethod=indent
+au BufRead,BufNewFile *.rst set foldlevel=0
+
+" Definición para los archivos .py
+au BufRead,BufNewFile *.py,*pyw set ts=4 sts=4 sw=4
+au BufRead,BufNewFile *.py,*pyw set expandtab
+au BufRead,BufNewFile *.py,*pyw set noai 
+au BufRead,BufNewFile *.py,*pyw set number
+au BufRead,BufNewFile *.py,*pyw set textwidth=79
+au BufRead,BufNewFile *.py,*pyw highlight RedundantWhitespace ctermbg=blue guibg=blue
+au BufRead,BufNewFile *.py,*pyw highlight BadWhitespace ctermbg=red guibg=red
+au BufRead,BufNewFile *.py,*pyw match BadWhitespace /^\t\+/
+au BufRead,BufNewFile *.py,*pyw match BadWhitespace /^\s\+$/
+au BufRead,BufNewFile *.py,*pyw set foldmethod=indent
+au BufRead,BufNewFile *.py,*pyw set foldlevel=0
+au BufNewFile *.py 0r ~/.vim/skeleton/python.py
+
